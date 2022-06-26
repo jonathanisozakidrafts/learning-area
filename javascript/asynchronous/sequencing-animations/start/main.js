@@ -15,7 +15,9 @@ const alice3 = document.querySelector("#alice3");
 
 const alice1Promise = alice1.animate(aliceTumbling, aliceTiming).finished;
 
-alice1Promise.then(function(response) {
+
+// This approach uses a chain of promises.
+/* alice1Promise.then(function(response) {
 
     return alice2.animate(aliceTumbling, aliceTiming).finished;
 
@@ -23,4 +25,14 @@ alice1Promise.then(function(response) {
 
     return alice3.animate(aliceTumbling, aliceTiming).finished;
 
-});
+}); */
+
+async function animateAlices() {
+
+    const result1 = await alice1Promise;
+    const result2 = await alice2.animate(aliceTumbling, aliceTiming).finished;
+    const result3 = await alice3.animate(aliceTumbling, aliceTiming).finished;;
+
+}
+
+animateAlices();
